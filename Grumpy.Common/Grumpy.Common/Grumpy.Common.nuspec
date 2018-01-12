@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+    <metadata>
+        <id>Grumpy.Common</id>
+        <version>0</version>
+        <title>Grumpy.Common</title>
+        <description>Extension Methods and Helper classes</description>
+        <summary>
+            Extension methods etc used in my other projects, this NuGet package do not refer other Packages or Libraries.
+        </summary>
+        <tags>Extension</tags>
+        <authors>Anders Busted-Janum</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <language>en-US</language>
+        <copyright>Copyright © Anders Busted-Janum 2018</copyright>
+    </metadata>
+    <files>
+        <file src="Grumpy.Common.dll" target="lib\net451" />
+        <file src="Grumpy.Common.pdb" target="lib\net451" />
+    </files>
+</package>
