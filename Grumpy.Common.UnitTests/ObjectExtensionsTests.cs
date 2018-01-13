@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using FluentAssertions;
@@ -12,6 +13,7 @@ namespace Grumpy.Common.UnitTests
     [UseReporter(typeof(DiffReporter))]
     public class ObjectExtensionsTests
     {
+        [MethodImpl(MethodImplOptions.NoInlining)]
         [Fact]
         public void ShouldSerializeXml()
         {
