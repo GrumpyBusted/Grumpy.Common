@@ -8,7 +8,7 @@ namespace Grumpy.Common.UnitTests
 {
     public class ProcessInformationTests
     {
-        [Fact(Skip = "Cannot run on MyGet build service")]
+        [Fact]
         public void CanGetProcessInformation()
         {
             var cut = CreateProcessInformation();

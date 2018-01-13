@@ -2,7 +2,7 @@
 using Grumpy.Common.Threading;
 using Xunit;
 
-namespace Grumpy.Common.UnitTests
+namespace Grumpy.Common.IntegrationTests
 {
     public class TimerUtilityTests
     {
@@ -10,8 +10,7 @@ namespace Grumpy.Common.UnitTests
         public void CanWaitForExpression()
         {
             var i = 0;
-            // ReSharper disable once UnusedVariable
-            var res = TimerUtility.WaitForIt(() => { ++i; return i > 2; }, 100);
+            TimerUtility.WaitForIt(() => { ++i; return i > 2; }, 100).Should().BeTrue();
         }
 
         [Fact]

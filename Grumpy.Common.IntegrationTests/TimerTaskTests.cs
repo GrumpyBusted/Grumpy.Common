@@ -4,7 +4,7 @@ using Grumpy.Common.Interfaces;
 using Grumpy.Common.Threading;
 using Xunit;
 
-namespace Grumpy.Common.UnitTests
+namespace Grumpy.Common.IntegrationTests
 {
     public class TimerTaskTests
     {
@@ -22,7 +22,7 @@ namespace Grumpy.Common.UnitTests
             _cut.Start(() => ++i, 10, new CancellationToken());
             TimerUtility.WaitForIt(() => i > 2, 100);
             _cut.Stop();
-            i.Should().BeGreaterOrEqualTo(0);
+            i.Should().BeGreaterOrEqualTo(2);
         }
     }
 }
