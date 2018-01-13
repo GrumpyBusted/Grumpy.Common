@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Grumpy.Common")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Extension Methods and Helper classes")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Grumpy.Common")]
-[assembly: AssemblyCopyright("Copyright © Anders Busted-Janum 2018")]
+[assembly: AssemblyCopyright("Copyright © Busted-Janum 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

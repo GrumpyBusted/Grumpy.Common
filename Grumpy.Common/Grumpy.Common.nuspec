@@ -10,10 +10,13 @@
             This includes code that I have developed, copied from the internet and copied from a few friends and colleagues.
         </summary>
         <tags>Extension</tags>
-        <authors>GrumpyBusted</authors>
+        <authors>Anders Busted-Janum</authors>
+        <owners>GrumpyBusted</owners>
+        <projectUrl>https://github.com/GrumpyBusted/Grumpy.Common</projectUrl>
+        <licenseUrl>https://github.com/GrumpyBusted/Grumpy.Common/blob/master/LICENSE</licenseUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <language>en-US</language>
-        <copyright>Copyright © Anders Busted-Janum 2018</copyright>
+        <copyright>Copyright © Busted-Janum 2018</copyright>
     </metadata>
     <files>
         <file src="Grumpy.Common.dll" target="lib\net451" />
