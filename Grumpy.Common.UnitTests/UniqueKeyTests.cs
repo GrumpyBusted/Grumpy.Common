@@ -1,13 +1,12 @@
 ﻿using FluentAssertions;
 using Grumpy.Common.Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
-    [TestClass]
     public class UniqueKeyTests
     {
-        [TestMethod]
+        [Fact]
         public void CanGenerateUniqueKey()
         {
             var cut = CreateUniqueKey();

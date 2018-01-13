@@ -1,2 +1,5 @@
 # Grumpy.Common
-Common Extension methods and Helper classes used for my other projects. This project is published as a NuGet packages and has a minimum of dependencies to other Packages and Libraries.
+Extension Methods and Helper classes
+------------------------------------
+Extension methods etc. used in my other projects, this NuGet package do not refer other Packages or Libraries.
+This includes code that I have developed, copied from the internet and copied from a few friends and colleagues.

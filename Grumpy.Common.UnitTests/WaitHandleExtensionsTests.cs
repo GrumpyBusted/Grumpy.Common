@@ -2,14 +2,13 @@
 using FluentAssertions;
 using Grumpy.Common.Extensions;
 using Grumpy.Common.UnitTests.Helper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
-    [TestClass]
     public class WaitHandleExtensionsTests
     {
-        [TestMethod]
+        [Fact]
         public void CanCastWaitHandleToTask()
         {
             var waitHandle = new MyWaitHandle();

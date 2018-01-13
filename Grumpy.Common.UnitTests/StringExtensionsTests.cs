@@ -7,16 +7,15 @@ using System.Text;
 using FluentAssertions;
 using Grumpy.Common.Extensions;
 using Grumpy.Common.UnitTests.Helper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
-    [TestClass]
     public class StringExtensionsTests
     {
         private const string SomeText = "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...";
 
-        [TestMethod]
+        [Fact]
         public void DeserializeXml_Work()
         {
             const string str = "<TestPerson><Age>8</Age><Name>Sara</Name></TestPerson>";
@@ -27,524 +26,523 @@ namespace Grumpy.Common.UnitTests
             result.Name.Should().Be("Sara");
         }
 
-        [TestMethod]
+        [Fact]
         public void NullOrEmpty_Null_True()
         {
             ((string)null).NullOrEmpty().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public void NullOrEmpty_Empty_True()
         {
             "".NullOrEmpty().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public void NullOrEmpty_Space_False()
         {
             " ".NullOrEmpty().Should().BeFalse();
         }
 
-        [TestMethod]
+        [Fact]
         public void NullOrEmpty_NonEmpty_False()
         {
             "Hallo".NullOrEmpty().Should().BeFalse();
         }
 
-        [TestMethod]
+        [Fact]
         public void NullOrWhiteSpace_Null_True()
         {
             ((string)null).NullOrWhiteSpace().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public void NullOrWhiteSpace_Empty_True()
         {
             "".NullOrWhiteSpace().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public void NullOrWhiteSpace_Space_True()
         {
             " ".NullOrWhiteSpace().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public void NullOrWhiteSpace_NonEmpty_False()
         {
             "Hallo".NullOrWhiteSpace().Should().BeFalse();
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_CharactersNotFound_False()
         {
             char[] a = { 'O', ':', 'D' };
 
-            Assert.IsFalse("Hallo there".ContainsAnyOf(a));
+            "Hallo there".ContainsAnyOf(a).Should().BeFalse();
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_OneOfCharactersFound_True()
         {
             char[] a = { 'O', ':', 'D' };
 
-            Assert.IsTrue("HallO there".ContainsAnyOf(a));
+            "HallO there".ContainsAnyOf(a).Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_EmptyString_False()
         {
             char[] a = { 'A', ':', 'D' };
 
-            Assert.IsFalse("".ContainsAnyOf(a));
+            Assert.False("".ContainsAnyOf(a));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_EmptyList_False()
         {
             char[] b = { };
 
-            Assert.IsFalse("Hallo".ContainsAnyOf(b));
+            Assert.False("Hallo".ContainsAnyOf(b));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_EmptyListInEmptyString_False()
         {
             char[] b = { };
 
-            Assert.IsFalse("".ContainsAnyOf(b));
+            Assert.False("".ContainsAnyOf(b));
         }
 
-        [TestMethod]
+        [Fact]
         public void StartWith_StringHasPrefix_SameString()
         {
-            Assert.AreEqual("Hi There".StartWith("H"), "Hi There");
+            Assert.Equal("Hi There", "Hi There".StartWith("H"));
         }
 
-        [TestMethod]
+        [Fact]
         public void StartWith_StringDoesNotHavePrefix_DifferentString()
         {
-            Assert.AreEqual("Hi There".StartWith("g"), "gHi There");
+            Assert.Equal("gHi There", "Hi There".StartWith("g"));
         }
 
-        [TestMethod]
+        [Fact]
         public void EndWith_StringHasSuffix_SameString()
         {
-            Assert.AreEqual("Hi There".EndWith("e"), "Hi There");
+            Assert.Equal("Hi There", "Hi There".EndWith("e"));
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void EndWith_StringDoNotHaveSuffix_DifferentString()
         {
-            Assert.AreEqual("Albert".EndWith("s"), "Alberts");
+            Assert.Equal("Alberts", "Albert".EndWith("s"));
         }
 
-        [TestMethod]
+        [Fact]
         public void StartsWith_True()
         {
-            Assert.IsTrue("Hi There".StartsWith("H"));
+            Assert.StartsWith("H", "Hi There");
         }
 
-        [TestMethod]
+        [Fact]
         public void StartsWith_False()
         {
-            Assert.IsFalse("Hi There".StartsWith("g"));
+            Assert.False("Hi There".StartsWith("g"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Less_LargerString_False()
         {
-            Assert.IsFalse("Hi There".Less("Gi There"));
+            Assert.False("Hi There".Less("Gi There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Less_SmallerString_True()
         {
-            Assert.IsTrue("Hi There".Less("Ji There"));
+            Assert.True("Hi There".Less("Ji There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Less_EmptyString_False()
         {
-            Assert.IsFalse("Hi There".Less(""));
+            Assert.False("Hi There".Less(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void Less_StringEqual_False()
         {
-            Assert.IsFalse("Hi There".Less("Hi There"));
+            Assert.False("Hi There".Less("Hi There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void LessOrEqual_LargerString_False()
         {
-            Assert.IsFalse("Hi There".LessOrEqual("Gi There"));
+            Assert.False("Hi There".LessOrEqual("Gi There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void LessOrEqual_SmallerString_True()
         {
-            Assert.IsTrue("Hi There".LessOrEqual("Ji There"));
+            Assert.True("Hi There".LessOrEqual("Ji There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void LessOrEqual_EmptyString_False()
         {
-            Assert.IsFalse("Hi There".LessOrEqual(""));
+            Assert.False("Hi There".LessOrEqual(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void LessOrEqual_StringEqual_True()
         {
-            Assert.IsTrue("Hi There".LessOrEqual("Hi There"));
+            Assert.True("Hi There".LessOrEqual("Hi There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Greater_LargerString_True()
         {
-            Assert.IsTrue("Hi There".Greater("Gi There"));
+            Assert.True("Hi There".Greater("Gi There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Greater_SmallerString_False()
         {
-            Assert.IsFalse("Hi There".Greater("Ji There"));
+            Assert.False("Hi There".Greater("Ji There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Greater_EmptyString_True()
         {
-            Assert.IsTrue("Hi There".Greater(""));
+            Assert.True("Hi There".Greater(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void Greater_SameString_False()
         {
-            Assert.IsFalse("Hi There".Greater("Hi There"));
+            Assert.False("Hi There".Greater("Hi There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void GreaterOrEqual_LargerString_True()
         {
-            Assert.IsTrue("Hi There".GreaterOrEqual("Gi There"));
+            Assert.True("Hi There".GreaterOrEqual("Gi There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void GreaterOrEqual_SmallerString_False()
         {
-            Assert.IsFalse("Hi There".GreaterOrEqual("Ji There"));
+            Assert.False("Hi There".GreaterOrEqual("Ji There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void GreaterOrEqual_EmptyString_True()
         {
-            Assert.IsTrue("Hi There".GreaterOrEqual(""));
+            Assert.True("Hi There".GreaterOrEqual(""));
         }
 
-        [TestMethod]
+        [Fact]
         public void GreaterOrEqual_SameString_True()
         {
-            Assert.IsTrue("Hi There".GreaterOrEqual("Hi There"));
+            Assert.True("Hi There".GreaterOrEqual("Hi There"));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_OneCharInString_True()
         {
-            Assert.IsTrue("Hi There".ContainsAnyOf('a', 'b', 'e', 'f'));
+            Assert.True("Hi There".ContainsAnyOf('a', 'b', 'e', 'f'));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_MoreCharsInString_True()
         {
-            Assert.IsTrue("Hi There".ContainsAnyOf('a', 'b', 'e', 'f', 'T'));
+            Assert.True("Hi There".ContainsAnyOf('a', 'b', 'e', 'f', 'T'));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_NoCharsInString_False()
         {
-            Assert.IsFalse("Hi There".ContainsAnyOf('a', 'b', 'E', 'f', 't'));
+            Assert.False("Hi There".ContainsAnyOf('a', 'b', 'E', 'f', 't'));
         }
 
-        [TestMethod]
+        [Fact]
         public void Left_NullString()
         {
-            Assert.IsNull(((string)null).Left(10));
+            Assert.Null(((string)null).Left(10));
         }
 
-        [TestMethod]
+        [Fact]
         public void Left_EmptyString()
         {
-            Assert.AreEqual(string.Empty, string.Empty.Left(10));
+            Assert.Equal(string.Empty, string.Empty.Left(10));
         }
 
-        [TestMethod]
+        [Fact]
         public void Left_LongString()
         {
             var ss = SomeText.Left(50);
 
-            Assert.AreEqual(50, ss.Length);
-            Assert.AreEqual(SomeText.Substring(0, 50), ss);
+            Assert.Equal(50, ss.Length);
+            Assert.Equal(SomeText.Substring(0, 50), ss);
         }
 
-        [TestMethod]
+        [Fact]
         public void Left_StringToShort()
         {
             var s = SomeText.Left(120);
 
-            Assert.AreEqual(94, s.Length);
-            Assert.AreEqual(SomeText, s);
+            Assert.Equal(94, s.Length);
+            Assert.Equal(SomeText, s);
         }
 
-        [TestMethod]
+        [Fact]
         public void Left_NegativePart()
         {
-            Assert.AreEqual(SomeText.Substring(0, SomeText.Length - 1), SomeText.Left(-1));
+            Assert.Equal(SomeText.Substring(0, SomeText.Length - 1), SomeText.Left(-1));
         }
 
-        [TestMethod]
+        [Fact]
         public void Left_NegativeAll()
         {
-            Assert.AreEqual("", SomeText.Left(-120));
+            Assert.Equal("", SomeText.Left(-120));
         }
 
-        [TestMethod]
+        [Fact]
         public void Right_NullString()
         {
-            Assert.IsNull(((string)null).Right(10));
+            Assert.Null(((string)null).Right(10));
         }
 
-        [TestMethod]
+        [Fact]
         public void Right_EmptyString()
         {
-            Assert.AreEqual(string.Empty, string.Empty.Right(10));
+            Assert.Equal(string.Empty, string.Empty.Right(10));
         }
 
-        [TestMethod]
+        [Fact]
         public void Right_LongString()
         {
             var s = SomeText.Right(50);
 
-            Assert.AreEqual(50, s.Length);
-            Assert.AreEqual(SomeText.Substring(44, 50), s);
+            Assert.Equal(50, s.Length);
+            Assert.Equal(SomeText.Substring(44, 50), s);
         }
 
-        [TestMethod]
+        [Fact]
         public void Right_StringToShort()
         {
             var s = SomeText.Right(120);
 
-            Assert.AreEqual(94, s.Length);
-            Assert.AreEqual(SomeText, s);
+            Assert.Equal(94, s.Length);
+            Assert.Equal(SomeText, s);
         }
 
-        [TestMethod]
+        [Fact]
         public void Right_NegativePart()
         {
-            Assert.AreEqual(SomeText.Substring(1), SomeText.Right(-1));
+            Assert.Equal(SomeText.Substring(1), SomeText.Right(-1));
         }
 
-        [TestMethod]
+        [Fact]
         public void Right_NegativeAll()
         {
-            Assert.AreEqual("", SomeText.Right(-120));
+            Assert.Equal("", SomeText.Right(-120));
         }
 
-        [TestMethod]
+        [Fact]
         public void ToStream_Text_Match()
         {
             var act = SomeText.ToStream();
 
             using (var reader = new StreamReader(act, Encoding.UTF8))
-                Assert.AreEqual(SomeText, reader.ReadToEnd());
+                Assert.Equal(SomeText, reader.ReadToEnd());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToStream_Null_Null()
         {
             var act = ((string)null).ToStream();
 
-            Assert.IsNull(act);
+            Assert.Null(act);
         }
 
-        [TestMethod]
+        [Fact]
         public void StartsWith_Match_True()
         {
-            Assert.IsTrue("Hi".StartsWith("H"));
+            Assert.StartsWith("H", "Hi");
         }
 
-        [TestMethod]
+        [Fact]
         public void StartsWith_NonMatch_False()
         {
-            Assert.IsFalse("Hi".StartsWith("h"));
+            Assert.False("Hi".StartsWith("h"));
         }
 
-        [TestMethod]
+        [Fact]
         public void StartsWith_Empty_False()
         {
-            Assert.IsFalse("".StartsWith("h"));
+            Assert.False("".StartsWith("h"));
         }
 
-        [TestMethod]
+        [Fact]
         public void StartsWith_Null_False()
         {
-            Assert.IsFalse(StringExtensions.StartsWith(null, "h"));
+            Assert.False(StringExtensions.StartsWith(null, "h"));
         }
 
-        [TestMethod]
+        [Fact]
         public void StartsWith_Any_True()
         {
-            Assert.IsTrue("Hi".StartsWith("h", "H"));
+            Assert.True("Hi".StartsWith("h", "H"));
         }
 
-        [TestMethod]
+        [Fact]
         public void StartsWith_None_False()
         {
-            Assert.IsFalse("Hi".StartsWith("d", "D"));
+            Assert.False("Hi".StartsWith("d", "D"));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAllOf_Char_True()
         {
-            Assert.IsTrue("Hi there you lovely person".ContainsAllOf('o', 'p', 'H'));
+            Assert.True("Hi there you lovely person".ContainsAllOf('o', 'p', 'H'));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAllOf_Char_False()
         {
-            Assert.IsFalse("Hi there you lovely person".ContainsAllOf('o', 'p', 'G'));
+            Assert.False("Hi there you lovely person".ContainsAllOf('o', 'p', 'G'));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_Char_True()
         {
-            Assert.IsTrue("Hi there you lovely person".ContainsAnyOf('O', 'p', 'G'));
+            Assert.True("Hi there you lovely person".ContainsAnyOf('O', 'p', 'G'));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_Char_False()
         {
-            Assert.IsFalse("Hi there you lovely person".ContainsAnyOf('O', 'P', 'g'));
+            Assert.False("Hi there you lovely person".ContainsAnyOf('O', 'P', 'g'));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAllOf_String_True()
         {
-            Assert.IsTrue("Hi there you lovely person".ContainsAllOf("ove", "per", "Hi "));
+            Assert.True("Hi there you lovely person".ContainsAllOf("ove", "per", "Hi "));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAllOf_String_False()
         {
-            Assert.IsFalse("Hi there you lovely person".ContainsAllOf("ove", "per", "G"));
+            Assert.False("Hi there you lovely person".ContainsAllOf("ove", "per", "G"));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_String_True()
         {
-            Assert.IsTrue("Hi there you lovely person".ContainsAnyOf("O", "per", "G"));
+            Assert.True("Hi there you lovely person".ContainsAnyOf("O", "per", "G"));
         }
 
-        [TestMethod]
+        [Fact]
         public void ContainsAnyOf_String_False()
         {
-            Assert.IsFalse("Hi there you lovely person".ContainsAnyOf("op", "yi", "g"));
+            Assert.False("Hi there you lovely person".ContainsAnyOf("op", "yi", "g"));
         }
 
-        [TestMethod]
+        [Fact]
         public void To_Enum_Match()
         {
-            Assert.AreEqual(DayOfWeek.Monday, "Monday".To<DayOfWeek>());
+            Assert.Equal(DayOfWeek.Monday, "Monday".To<DayOfWeek>());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToMilliseconds_Match()
         {
-            Assert.AreEqual(new TimeSpan(0, 0, 0, 1).TotalMilliseconds, "1s".ToMilliseconds());
+            Assert.Equal(new TimeSpan(0, 0, 0, 1).TotalMilliseconds, "1s".ToMilliseconds());
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(InvalidCastException))]
+        [Fact]
         public void To_Enum_Comma_Match()
         {
-            Assert.AreEqual(DayOfWeek.Monday, "Monday, Tuesday".To<DayOfWeek>());
+            Assert.Throws<InvalidCastException>(() => "Monday, Tuesday".To<DayOfWeek>());
         }
 
-        [TestMethod]
+        [Fact]
         public void To_Int_Match()
         {
-            Assert.AreEqual(314, "314".To<int>());
+            Assert.Equal(314, "314".To<int>());
         }
 
-        [TestMethod]
+        [Fact]
         public void To_NullableInt_Match()
         {
-            Assert.AreEqual(314, "314".To<int?>());
+            Assert.Equal(314, "314".To<int?>());
         }
 
-        [TestMethod]
+        [Fact]
         public void To_Double_Match()
         {
-            Assert.AreEqual(314.54, "314.54".To<double>());
+            Assert.Equal(314.54, "314.54".To<double>());
         }
 
-        [TestMethod]
+        [Fact]
         public void To_String_Match()
         {
-            Assert.AreEqual("314.54", "314.54".To<string>());
+            Assert.Equal("314.54", "314.54".To<string>());
         }
 
-        [TestMethod]
+        [Fact]
         public void AsRegEx_True()
         {
-            Assert.IsTrue("^\\d{3}-\\d{3}-\\d{4}$".AsRegex().IsMatch("123-456-7890"));
+            Assert.Matches("^\\d{3}-\\d{3}-\\d{4}$".AsRegex(), "123-456-7890");
         }
 
-        [TestMethod]
+        [Fact]
         public void AsRegEx_False()
         {
-            Assert.IsFalse("^\\d{3}-\\d{3}-\\d{4}$".AsRegex().IsMatch("123-456-789D"));
+            Assert.DoesNotMatch("^\\d{3}-\\d{3}-\\d{4}$".AsRegex(), "123-456-789D");
         }
 
-        [TestMethod]
+        [Fact]
         public void MatchesRegEx_True()
         {
-            Assert.IsTrue("123-456-7890".MatchesRegex("^\\d{3}-\\d{3}-\\d{4}$"));
+            Assert.True("123-456-7890".MatchesRegex("^\\d{3}-\\d{3}-\\d{4}$"));
         }
 
-        [TestMethod]
+        [Fact]
         public void MatchesRegex_False()
         {
-            Assert.IsFalse("123-456-7D90".MatchesRegex("^\\d{3}-\\d{3}-\\d{4}$"));
+            Assert.False("123-456-7D90".MatchesRegex("^\\d{3}-\\d{3}-\\d{4}$"));
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void ReplaceAnyOf_Test()
         {
-            Assert.AreEqual("abxxxcd#efxxxgh&ij(kl)m", "ab!cd#ef%gh&ij(kl)m".ReplaceAnyOf("!%", "xxx"));
+            Assert.Equal("abxxxcd#efxxxgh&ij(kl)m", "ab!cd#ef%gh&ij(kl)m".ReplaceAnyOf("!%", "xxx"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Escape_Test()
         {
-            Assert.AreEqual(@"field1\;field2\\field3", @"field1;field2\field3".Escape(";", '\\'));
+            Assert.Equal(@"field1\;field2\\field3", @"field1;field2\field3".Escape(";", '\\'));
         }
 
-        [TestMethod]
+        [Fact]
         public void SplitWithEscape_Test_1()
         {
             const string s = @"abc\;def;ghi\\jkl;mno\\\pqr";
 
             var res = s.SplitWithEscape(';', '\\').ToArray();
 
-            Assert.AreEqual(3, res.Length);
-            Assert.AreEqual(@"abc;def", res[0]);
-            Assert.AreEqual(@"ghi\jkl", res[1]);
-            Assert.AreEqual(@"mno\\pqr", res[2]);
+            Assert.Equal(3, res.Length);
+            Assert.Equal(@"abc;def", res[0]);
+            Assert.Equal(@"ghi\jkl", res[1]);
+            Assert.Equal(@"mno\\pqr", res[2]);
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void SplitWithEscape_Test_2()
         {
@@ -552,239 +550,238 @@ namespace Grumpy.Common.UnitTests
 
             var res = s.SplitWithEscape(';', '\\').ToArray();
 
-            Assert.AreEqual(@"US;Do\llar", res[0]);
+            Assert.Equal(@"US;Do\llar", res[0]);
         }
 
-        [TestMethod]
+        [Fact]
         public void SplitWithEscape_Test_3()
         {
             const string s = @"User;U3334;Anders Busted-Janum\;ABJA\;25243705\;anders@busted-janum.dk\;1973-10-25\;2017-11-01";
 
             var res = s.SplitWithEscape(';', '\\').ToArray();
 
-            Assert.AreEqual(3, res.Length);
-            Assert.AreEqual("User", res[0]);
-            Assert.AreEqual("U3334", res[1]);
-            Assert.AreEqual(@"Anders Busted-Janum;ABJA;25243705;anders@busted-janum.dk;1973-10-25;2017-11-01", res[2]);
+            Assert.Equal(3, res.Length);
+            Assert.Equal("User", res[0]);
+            Assert.Equal("U3334", res[1]);
+            Assert.Equal(@"Anders Busted-Janum;ABJA;25243705;anders@busted-janum.dk;1973-10-25;2017-11-01", res[2]);
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperName_1()
         {
-            Assert.AreEqual("Albert Einstein", "AlBerT EinSTEIn".ToProperName());
+            Assert.Equal("Albert Einstein", "AlBerT EinSTEIn".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperName_2()
         {
-            Assert.AreEqual("Albert-Einstein", "alBerT-einSTEIn".ToProperName());
+            Assert.Equal("Albert-Einstein", "alBerT-einSTEIn".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperName_3()
         {
-            Assert.AreEqual(" Albert-Einstein", " alBerT-einSTEIn".ToProperName());
+            Assert.Equal(" Albert-Einstein", " alBerT-einSTEIn".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperName_4()
         {
-            Assert.AreEqual("Albert  Einstein", "alBerT  einSTEIn".ToProperName());
+            Assert.Equal("Albert  Einstein", "alBerT  einSTEIn".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperName_5()
         {
-            Assert.AreEqual("Albert- Einstein", "alBerT- einSTEIn".ToProperName());
+            Assert.Equal("Albert- Einstein", "alBerT- einSTEIn".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperName_6()
         {
-            Assert.AreEqual("Albert -Einstein", "alBerT -einSTEIn".ToProperName());
+            Assert.Equal("Albert -Einstein", "alBerT -einSTEIn".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperName_7()
         {
-            Assert.AreEqual("Albert--Einstein", "alBerT--einSTEIn".ToProperName());
+            Assert.Equal("Albert--Einstein", "alBerT--einSTEIn".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperName_8()
         {
-            Assert.AreEqual("Albert-Einstein ", "alBerT-einSTEIn ".ToProperName());
+            Assert.Equal("Albert-Einstein ", "alBerT-einSTEIn ".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void ToProperName_Danish_1()
         {
-            Assert.AreEqual("Øjvin-Børn", "øjvin-BØrn".ToProperName());
+            Assert.Equal("Øjvin-Børn", "øjvin-BØrn".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void ToProperName_Danish_2()
         {
-            Assert.AreEqual("Ånders Månd", "ånders Månd".ToProperName());
+            Assert.Equal("Ånders Månd", "ånders Månd".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void ToProperName_Danish_3()
         {
-            Assert.AreEqual("Únders Månd", "únders MÅnd".ToProperName());
+            Assert.Equal("Únders Månd", "únders MÅnd".ToProperName());
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void ToProperName_Danish_4()
         {
-            Assert.AreEqual("Ånders Børn", "ånders BØrn".ToProperName(CultureInfo.GetCultureInfo("En-us")));
+            Assert.Equal("Ånders Børn", "ånders BØrn".ToProperName(CultureInfo.GetCultureInfo("En-us")));
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void ToProperName_Danish_5()
         {
-            Assert.AreEqual("Ånders Børn", "ånders BØrn".ToProperName(CultureInfo.GetCultureInfo("En-in")));
+            Assert.Equal("Ånders Børn", "ånders BØrn".ToProperName(CultureInfo.GetCultureInfo("En-in")));
         }
 
-        [TestMethod]
+        [Fact]
         public void Quotify_Empty()
         {
-            Assert.AreEqual("", "".Quotify());
+            Assert.Equal("", "".Quotify());
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void Quotify_OneWord_NotQuoted()
         {
-            Assert.AreEqual("Iwasheretoday", "Iwasheretoday".Quotify());
+            Assert.Equal("Iwasheretoday", "Iwasheretoday".Quotify());
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void Quotify_TwoWords_Quoted()
         {
-            Assert.AreEqual("\"I washeretoday\"", "I washeretoday".Quotify());
+            Assert.Equal("\"I washeretoday\"", "I washeretoday".Quotify());
         }
 
-        [TestMethod]
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void Quotify_DifferentBlankCharacter_Quoted()
         {
-            Assert.AreEqual("'Iwasheretoday'", "Iwasheretoday".Quotify("'", "o"));
+            Assert.Equal("'Iwasheretoday'", "Iwasheretoday".Quotify("'", "o"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Quotify_AlreadyQuoted_SameString()
         {
-            Assert.AreEqual("\"I was here 'today'\"", "\"I was here 'today'\"".Quotify());
+            Assert.Equal("\"I was here 'today'\"", "\"I was here 'today'\"".Quotify());
         }
 
-        [TestMethod]
+        [Fact]
         public void Quotify_OnlyQuoteAtEnd_QuotedWithDoubleAtEnd()
         {
-            Assert.AreEqual("\"I was here 'today'\"\"", "I was here 'today'\"".Quotify());
+            Assert.Equal("\"I was here 'today'\"\"", "I was here 'today'\"".Quotify());
         }
 
-        [TestMethod]
+        [Fact]
         public void Quotify_OnlyQuoteAtStart_QuotedWithDoubleAtStart()
         {
-            Assert.AreEqual("\"\"I was here 'today'\"", "\"I was here 'today'".Quotify());
+            Assert.Equal("\"\"I was here 'today'\"", "\"I was here 'today'".Quotify());
         }
 
-        [TestMethod]
+        [Fact]
         public void IndexOfNth_FoundInStartOfString_Zero()
         {
-            Assert.AreEqual(0, "#".IndexOfNth("#", 1));
+            Assert.Equal(0, "#".IndexOfNth("#", 1));
         }
 
-        [TestMethod]
+        [Fact]
         public void IndexOfNth_SearchForMoreOccurrenceThanInString_MinusOne()
         {
-            Assert.AreEqual(-1, "#".IndexOfNth("#", 2));
+            Assert.Equal(-1, "#".IndexOfNth("#", 2));
         }
 
-        [TestMethod]
+        [Fact]
         public void IndexOfNth_SearchForSecondOccurrence_Found()
         {
-            Assert.AreEqual(1, "##".IndexOfNth("#", 2));
+            Assert.Equal(1, "##".IndexOfNth("#", 2));
         }
 
-        [TestMethod]
+        [Fact]
         public void IndexOfNth_SearchForStringNotFound_MinusOne()
         {
-            Assert.AreEqual(-1, "#".IndexOfNth("##", 1));
+            Assert.Equal(-1, "#".IndexOfNth("##", 1));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
+        [Fact]
         public void IndexOfNth_Error()
         {
-            Assert.AreEqual(0, "#".IndexOfNth("#", 0));
+            Assert.Throws<NotSupportedException>(() => "#".IndexOfNth("#", 0));
         }
 
-        [TestMethod]
+        [Fact]
         public void ToUpperFirstCharacter_MixCaseText()
         {
-            Assert.AreEqual("Word. WORD. word", "word. WORD. word".ToUpperFirstCharacter());
+            Assert.Equal("Word. WORD. word", "word. WORD. word".ToUpperFirstCharacter());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperFirst_MultipleParagraph()
         {
-            Assert.AreEqual("Word. word. word", "WORD. WORD. WORD".ToProperFirst());
+            Assert.Equal("Word. word. word", "WORD. WORD. WORD".ToProperFirst());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperParagraph_UpdateCaseString()
         {
-            Assert.AreEqual("Karin is testing", "KARIN IS TESTING".ToProperFirst());
+            Assert.Equal("Karin is testing", "KARIN IS TESTING".ToProperFirst());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperParagraph_MultiplePoints()
         {
-            Assert.AreEqual("Word.. Word.. Word", "WORD.. WORD.. WORD".ToProperParagraph());
+            Assert.Equal("Word.. Word.. Word", "WORD.. WORD.. WORD".ToProperParagraph());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperParagraph_MultipleParagraph()
         {
-            Assert.AreEqual("Word. Word. Word", "WORD. WORD. WORD".ToProperParagraph());
+            Assert.Equal("Word. Word. Word", "WORD. WORD. WORD".ToProperParagraph());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperParagraph_UpperCaseString()
         {
-            Assert.AreEqual("Karin is testing", "KARIN IS TESTING".ToProperParagraph());
+            Assert.Equal("Karin is testing", "KARIN IS TESTING".ToProperParagraph());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperParagraph_NordicCharacters()
         {
-            Assert.AreEqual("Åå åå. Ææ ææ. Øø øø. Ää ää. Öö öö", "åå åå. ææ ææ. øø øø. ää ää. öö öö".ToProperParagraph());
+            Assert.Equal("Åå åå. Ææ ææ. Øø øø. Ää ää. Öö öö", "åå åå. ææ ææ. øø øø. ää ää. öö öö".ToProperParagraph());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProperParagraph_EmptyString()
         {
-            Assert.AreEqual("", "".ToProperParagraph());
+            Assert.Equal("", "".ToProperParagraph());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProper_UpperCaseString()
         {
-            Assert.AreEqual("Karin Is Testing", "KARIN IS TESTING".ToProper());
+            Assert.Equal("Karin Is Testing", "KARIN IS TESTING".ToProper());
         }
 
-        [TestMethod]
+        [Fact]
         public void ToProper_NordicCharacters()
         {
-            Assert.AreEqual("Åå Ææ Øø Ää Öö", "ÅÅ ÆÆ ØØ ÄÄ ÖÖ".ToProper());
+            Assert.Equal("Åå Ææ Øø Ää Öö", "ÅÅ ÆÆ ØØ ÄÄ ÖÖ".ToProper());
         }
     }
 }

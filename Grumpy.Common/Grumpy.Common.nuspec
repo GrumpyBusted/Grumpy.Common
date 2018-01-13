@@ -6,12 +6,14 @@
         <title>Grumpy.Common</title>
         <description>Extension Methods and Helper classes</description>
         <summary>
-            Extension methods etc used in my other projects, this NuGet package do not refer other Packages or Libraries.
+            Extension methods etc. used in my other projects, this NuGet package do not refer other Packages or Libraries.
+            This includes code that I have developed, copied from the internet and copied from a few friends and colleagues.
         </summary>
         <tags>Extension</tags>
-        <authors>Anders Busted-Janum</authors>
+        <authors>GrumpyBusted</authors>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <language>en-US</language>
+        <owner>Anders Busted-Janum</owner>
         <copyright>Copyright © Anders Busted-Janum 2018</copyright>
     </metadata>
     <files>

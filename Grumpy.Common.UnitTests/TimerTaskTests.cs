@@ -2,11 +2,10 @@
 using FluentAssertions;
 using Grumpy.Common.Interfaces;
 using Grumpy.Common.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
-    [TestClass]
     public class TimerTaskTests
     {
         private readonly ITimerTask _cut;
@@ -16,7 +15,7 @@ namespace Grumpy.Common.UnitTests
             _cut = new TimerTask();
         }
 
-        [TestMethod]
+        [Fact]
         public void CanStartTask()
         {
             var i = 0;

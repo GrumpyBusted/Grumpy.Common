@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Grumpy.Common.UnitTests")]
@@ -10,5 +10,5 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
-[assembly: Guid("81be4329-1f4b-4b7b-8d4d-3f3297eb9806")]
+[assembly: Guid("56cd1635-31ff-4b5e-90ba-ebbf40c09682")]
 [assembly: AssemblyVersion("1.0.*")]

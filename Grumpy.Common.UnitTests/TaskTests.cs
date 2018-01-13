@@ -3,11 +3,10 @@ using System.Threading;
 using FluentAssertions;
 using Grumpy.Common.Interfaces;
 using Grumpy.Common.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
-    [TestClass]
     public class TaskTests
     {
         private readonly ITask _cut;
@@ -17,7 +16,7 @@ namespace Grumpy.Common.UnitTests
             _cut = new Task(new System.Threading.Tasks.TaskFactory());
         }
 
-        [TestMethod]
+        [Fact]
         public void CanStartTask()
         {
             var i = 0;
@@ -27,7 +26,7 @@ namespace Grumpy.Common.UnitTests
             i.Should().Be(1);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanStartWithCancellationTokenTask()
         {
             var i = 0;
@@ -37,7 +36,7 @@ namespace Grumpy.Common.UnitTests
             i.Should().Be(1);
         }
 
-        [TestMethod]
+        [Fact]
         public void CanStartWithState()
         {
             var i = 0;
@@ -48,7 +47,7 @@ namespace Grumpy.Common.UnitTests
             _cut.Exception.Should().BeNull();
         }
 
-        [TestMethod]
+        [Fact]
         public void CanStopTask()
         {
             var stopwatch = new Stopwatch();

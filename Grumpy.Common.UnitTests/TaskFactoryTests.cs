@@ -1,14 +1,13 @@
 ﻿using FluentAssertions;
 using Grumpy.Common.Interfaces;
 using Grumpy.Common.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
-    [TestClass]
     public class TaskFactoryTests
     {
-        [TestMethod]
+        [Fact]
         public void CanCreateTask()
         {
             var cut = CreateTaskFactory();

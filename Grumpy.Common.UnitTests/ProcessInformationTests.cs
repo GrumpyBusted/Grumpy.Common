@@ -2,14 +2,13 @@
 using FluentAssertions;
 using Grumpy.Common.Extensions;
 using Grumpy.Common.Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
-    [TestClass]
     public class ProcessInformationTests
     {
-        [TestMethod]
+        [Fact]
         public void CanGetProcessInformation()
         {
             var cut = CreateProcessInformation();

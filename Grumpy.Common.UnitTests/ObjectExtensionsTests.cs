@@ -3,17 +3,16 @@ using System.Linq;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Grumpy.Common.Extensions;
 using Grumpy.Common.UnitTests.Helper;
+using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
     [UseReporter(typeof(DiffReporter))]
-    [TestClass]
     public class ObjectExtensionsTests
     {
-        [TestMethod]
+        [Fact]
         public void ShouldSerializeXml()
         {
             var testObj = new TestPerson
@@ -25,7 +24,7 @@ namespace Grumpy.Common.UnitTests
             Approvals.Verify(testObj.SerializeToXml());
         }
 
-        [TestMethod]
+        [Fact]
         public void SerializeXml_DoNotFormat_UnformattedXml()
         {
             var testObj = new TestPerson
@@ -37,261 +36,261 @@ namespace Grumpy.Common.UnitTests
             testObj.SerializeToXml(false).Should().Be(@"<TestPerson><Age>8</Age><Name>Sara</Name></TestPerson>");
         }
 
-        [TestMethod]
+        [Fact]
         public void IsNull_Null_True()
         {
             ((string)null).IsNull().Should().BeTrue();
         }
 
-        [TestMethod]
+        [Fact]
         public void IsNull_NotNull_False()
         {
             "".IsNull().Should().BeFalse();
         }
 
-        [TestMethod]
+        [Fact]
         public void In_IntergerInList_True()
         {
-            Assert.IsTrue(1.In(6, 9, 3, 1, 4));
+            Assert.True(1.In(6, 9, 3, 1, 4));
         }
 
-        [TestMethod]
+        [Fact]
         public void In_Null_True()
         {
             string s = null;
 
-            Assert.IsFalse(s.In("a", "b"));
+            Assert.False(s.In("a", "b"));
         }
 
-        [TestMethod]
+        [Fact]
         public void In_Bool_Null_True()
         {
             string s = null;
 
-            Assert.IsTrue(s.In(null));
+            Assert.True(s.In(null));
         }
 
-        [TestMethod]
+        [Fact]
         public void In_StringInList_True()
         {
-            Assert.IsTrue("1".In("6", "9", "3", "1", "4"));
+            Assert.True("1".In("6", "9", "3", "1", "4"));
         }
 
-        [TestMethod]
+        [Fact]
         public void In_IntergerNotInList_False()
         {
-            Assert.IsFalse(1.In(6, 9, 3, 0, 4));
+            Assert.False(1.In(6, 9, 3, 0, 4));
         }
 
-        [TestMethod]
+        [Fact]
         public void In_StringNotInList_False()
         {
-            Assert.IsFalse("1".In("6", "9", "3", " 1 ", "4"));
+            Assert.False("1".In("6", "9", "3", " 1 ", "4"));
         }
 
-        [TestMethod]
+        [Fact]
         public void In_ValueMultipleTimesInList_True()
         {
-            Assert.IsTrue("1".In("6", "9", "3", "1", "4", "1"));
+            Assert.True("1".In("6", "9", "3", "1", "4", "1"));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_ValueSmallerThanStart_False()
         {
-            Assert.IsFalse(2.Between(3, 7));
+            Assert.False(2.Between(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_ValueEqualStart_True()
         {
-            Assert.IsTrue(3.Between(3, 7));
+            Assert.True(3.Between(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_ValueInRange_True()
         {
-            Assert.IsTrue(5.Between(3, 7));
+            Assert.True(5.Between(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_ValueEqualEnd_True()
         {
-            Assert.IsTrue(7.Between(3, 7));
+            Assert.True(7.Between(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_ValueLargerThanEnd_False()
         {
-            Assert.IsFalse(9.Between(3, 7));
+            Assert.False(9.Between(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_SmallerWhenStartEqualEnd_False()
         {
-            Assert.IsFalse(4.Between(5, 5));
+            Assert.False(4.Between(5, 5));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_InRangeWhenStartEqualEnd_True()
         {
-            Assert.IsTrue(5.Between(5, 5));
+            Assert.True(5.Between(5, 5));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_LargerWhenStartEqualEnd_False()
         {
-            Assert.IsFalse(6.Between(5, 5));
+            Assert.False(6.Between(5, 5));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_ValueInRangeWhenStartLargerThanEnd_False()
         {
-            Assert.IsFalse(5.Between(7, 3));
+            Assert.False(5.Between(7, 3));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_SmallerValueWhenStartLargerThanEnd_False()
         {
-            Assert.IsFalse(1.Between(7, 3));
+            Assert.False(1.Between(7, 3));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_LargerValueWhenStartLargerThanEnd_False()
         {
-            Assert.IsFalse(9.Between(7, 3));
+            Assert.False(9.Between(7, 3));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_UsedOnDateTime_True()
         {
-            Assert.IsTrue(DateTime.Now.Between(DateTime.Now.AddMilliseconds(-100), DateTime.Now.AddMilliseconds(100)));
+            Assert.True(DateTime.Now.Between(DateTime.Now.AddMilliseconds(-100), DateTime.Now.AddMilliseconds(100)));
         }
 
-        [TestMethod]
+        [Fact]
         public void Between_UsedOnString_True()
         {
-            Assert.IsTrue("e".Between("c", "f"));
+            Assert.True("e".Between("c", "f"));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_ValueSmallerThanStart_False()
         {
-            Assert.IsFalse(2.BetweenExclusive(3, 7));
+            Assert.False(2.BetweenExclusive(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_ValueEqualStart_False()
         {
-            Assert.IsFalse(3.BetweenExclusive(3, 7));
+            Assert.False(3.BetweenExclusive(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_ValueInRange_True()
         {
-            Assert.IsTrue(5.BetweenExclusive(3, 7));
+            Assert.True(5.BetweenExclusive(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_ValueEqualEnd_False()
         {
-            Assert.IsFalse(7.BetweenExclusive(3, 7));
+            Assert.False(7.BetweenExclusive(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_ValueLargerThanEnd_False()
         {
-            Assert.IsFalse(9.BetweenExclusive(3, 7));
+            Assert.False(9.BetweenExclusive(3, 7));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_SmallerWhenStartEqualEnd_False()
         {
-            Assert.IsFalse(4.BetweenExclusive(5, 5));
+            Assert.False(4.BetweenExclusive(5, 5));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_InRangeWhenStartEqualEnd_False()
         {
-            Assert.IsFalse(5.BetweenExclusive(5, 5));
+            Assert.False(5.BetweenExclusive(5, 5));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_LargerWhenStartEqualEnd_False()
         {
-            Assert.IsFalse(6.BetweenExclusive(5, 5));
+            Assert.False(6.BetweenExclusive(5, 5));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_ValueInRangeWhenStartLargerThanEnd_False()
         {
-            Assert.IsFalse(5.BetweenExclusive(7, 3));
+            Assert.False(5.BetweenExclusive(7, 3));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_SmallerValueWhenStartLargerThanEnd_False()
         {
-            Assert.IsFalse(1.BetweenExclusive(7, 3));
+            Assert.False(1.BetweenExclusive(7, 3));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_LargerValueWhenStartLargerThanEnd_False()
         {
-            Assert.IsFalse(9.BetweenExclusive(7, 3));
+            Assert.False(9.BetweenExclusive(7, 3));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_UsedOnDateTime_True()
         {
-            Assert.IsTrue(DateTime.Now.BetweenExclusive(DateTime.Now.AddMilliseconds(-100), DateTime.Now.AddMilliseconds(100)));
+            Assert.True(DateTime.Now.BetweenExclusive(DateTime.Now.AddMilliseconds(-100), DateTime.Now.AddMilliseconds(100)));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_DateTimeValueEqualToStart_False()
         {
             var dateTime = DateTime.Now;
 
-            Assert.IsFalse(dateTime.BetweenExclusive(dateTime, dateTime.AddDays(1)));
+            Assert.False(dateTime.BetweenExclusive(dateTime, dateTime.AddDays(1)));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_DateTimeValueOnMillisecondBeforeStart_True()
         {
             var dateTime = DateTime.Now;
 
-            Assert.IsTrue(dateTime.BetweenExclusive(dateTime.AddMilliseconds(-1), dateTime.AddDays(1)));
+            Assert.True(dateTime.BetweenExclusive(dateTime.AddMilliseconds(-1), dateTime.AddDays(1)));
         }
 
-        [TestMethod]
+        [Fact]
         public void BetweenExclusive_UsedOnString_True()
         {
-            Assert.IsTrue("e".BetweenExclusive("c", "f"));
+            Assert.True("e".BetweenExclusive("c", "f"));
         }
 
-        [TestMethod]
+        [Fact]
         public void AsEnumerable_OnInterger_Work()
         {
             const int i = 5;
 
-            Assert.AreEqual(i, i.AsEnumerable().Single());
+            Assert.Equal(i, i.AsEnumerable().Single());
         }
 
-        [TestMethod]
+        [Fact]
         public void AsEnumerable_OnDouble_Work()
         {
             const double d = 5.4;
 
-            Assert.AreEqual(d, d.AsEnumerable().Single());
+            Assert.Equal(d, d.AsEnumerable().Single());
         }
 
-        [TestMethod]
+        [Fact]
         public void AsEnumerable_OnString_Work()
         {
             const string s = "string";
 
-            Assert.AreEqual(s, s.AsEnumerable().Single());
+            Assert.Equal(s, s.AsEnumerable().Single());
         }
 
-        [TestMethod]
+        [Fact]
         public void IsNumber_Work()
         {
             const string s = "string";

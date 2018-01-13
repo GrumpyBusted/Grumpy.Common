@@ -1,12 +1,11 @@
 ﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
-    [TestClass]
     public class UniqueKeyUtilityTests
     {
-        [TestMethod]
+        [Fact]
         public void CanGenerateUniqueKey()
         {
             UniqueKeyUtility.Generate().Should().NotBe("");
