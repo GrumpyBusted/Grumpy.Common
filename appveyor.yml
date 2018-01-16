@@ -17,7 +17,7 @@ test:
     only:
       - '**\bin\**\*.UnitTests.dll'
 after_build:
-  - ps: nuget pack Grumpy.Common\bin\Release\Grumpy.Common.nuspec -Version {version}
+  - ps: nuget pack Grumpy.Common\bin\Release\Grumpy.Common.nuspec -Version $env:APPVEYOR_BUILD_VERSION
 deploy:
   provider: NuGet
   api_key:
