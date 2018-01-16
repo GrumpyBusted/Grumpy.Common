@@ -27,6 +27,6 @@ notifications:
   - provider: Email
     to:
       - anders@busted-janum.dk
-    subject: 'Build {{status}}'         
+    subject: 'Build {{projectName}} {{buildVersion}} {{status}}'         
     message: "{{message}}, {{commitId}}"
     on_build_status_changed: true
