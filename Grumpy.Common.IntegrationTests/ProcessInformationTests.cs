@@ -1,10 +1,9 @@
 ﻿using System;
 using FluentAssertions;
-using Grumpy.Common.Extensions;
 using Grumpy.Common.Interfaces;
 using Xunit;
 
-namespace Grumpy.Common.UnitTests
+namespace Grumpy.Common.IntegrationTests
 {
     public class ProcessInformationTests
     {
@@ -13,8 +12,8 @@ namespace Grumpy.Common.UnitTests
         {
             var cut = CreateProcessInformation();
 
-            cut.MachineName.Should().Be(Environment.MachineName);
-            cut.UserName.Should().Be(Environment.UserName);
+            cut.MachineName.Should().Be(Environment.MachineName.ToUpper());
+            cut.UserName.Should().Be(Environment.UserName.ToUpper());
             cut.ApplicationName.Should().NotBeNull();
             cut.DomainName.Should().NotBeNull();
             cut.Id.Should().BeGreaterThan(0);

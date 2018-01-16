@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using FluentAssertions;
 using Grumpy.Common.Interfaces;
 using Grumpy.Common.Threading;
@@ -6,13 +7,24 @@ using Xunit;
 
 namespace Grumpy.Common.IntegrationTests
 {
-    public class TimerTaskTests
+    public class TimerTaskTests : IDisposable
     {
         private readonly ITimerTask _cut;
 
         public TimerTaskTests()
         {
             _cut = new TimerTask();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+                _cut.Dispose();
         }
 
         [Fact]

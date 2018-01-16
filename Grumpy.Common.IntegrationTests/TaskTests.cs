@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using FluentAssertions;
 using Grumpy.Common.Interfaces;
@@ -7,13 +8,24 @@ using Xunit;
 
 namespace Grumpy.Common.IntegrationTests
 {
-    public class TaskTests
+    public class TaskTests : IDisposable
     {
         private readonly ITask _cut;
 
         public TaskTests()
         {
             _cut = new Task(new System.Threading.Tasks.TaskFactory());
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+                _cut.Dispose();
         }
 
         [Fact]

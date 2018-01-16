@@ -5,6 +5,7 @@ using Grumpy.Common.Interfaces;
 
 namespace Grumpy.Common.Threading
 {
+    /// <inheritdoc />
     [SuppressMessage("ReSharper", "ClassWithVirtualMembersNeverInherited.Global")]
     public class TimerTask : ITimerTask
     {
@@ -12,6 +13,7 @@ namespace Grumpy.Common.Threading
         private CancellationTokenRegistration _cancellationTokenRegistration;
         private bool _disposed;
 
+        /// <inheritdoc />
         public void Start(Action action, int millisecondsIntervals, CancellationToken cancellationToken)
         {
             if (_cancellationTokenSource != null)
@@ -33,6 +35,7 @@ namespace Grumpy.Common.Threading
             }
         }
 
+        /// <inheritdoc />
         public void Stop()
         {
             _cancellationTokenSource?.Cancel();
@@ -41,11 +44,16 @@ namespace Grumpy.Common.Threading
             _cancellationTokenSource = null;
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             Dispose(true);
         }
 
+        /// <summary>
+        /// Dispose locale objects
+        /// </summary>
+        /// <param name="disposing"></param>
         [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed")]  
         protected virtual void Dispose(bool disposing)
         {

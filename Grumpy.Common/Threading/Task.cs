@@ -7,6 +7,7 @@ using Grumpy.Common.Extensions;
 
 namespace Grumpy.Common.Threading
 {
+    /// <inheritdoc />
     [SuppressMessage("ReSharper", "ClassWithVirtualMembersNeverInherited.Global")]
     public class Task : ITask
     {
@@ -16,11 +17,13 @@ namespace Grumpy.Common.Threading
         private System.Threading.Tasks.Task _task;
         private bool _disposed;
 
+        /// <inheritdoc />
         public Task(System.Threading.Tasks.TaskFactory taskFactory)
         {
             _taskFactory = taskFactory;
         }
 
+        /// <inheritdoc />
         public void Start(Action action)
         {
             _cancellationTokenSource = new CancellationTokenSource();
@@ -28,6 +31,7 @@ namespace Grumpy.Common.Threading
             _task = _taskFactory.StartNew(action, _cancellationTokenSource.Token);
         }
 
+        /// <inheritdoc />
         public void Start(Action action, CancellationToken cancellationToken)
         {
             _cancellationTokenSource = new CancellationTokenSource();
@@ -36,6 +40,7 @@ namespace Grumpy.Common.Threading
             _task = _taskFactory.StartNew(action, _cancellationTokenSource.Token);
         }
 
+        /// <inheritdoc />
         public void Start(Action<object> action, object state, CancellationToken cancellationToken)
         {
             _cancellationTokenSource = new CancellationTokenSource();
@@ -44,6 +49,7 @@ namespace Grumpy.Common.Threading
             _task = _taskFactory.StartNew(action, state, _cancellationTokenSource.Token);
         }
 
+        /// <inheritdoc />
         public void Stop()
         {
             if (_cancellationTokenSource != null)
@@ -63,6 +69,7 @@ namespace Grumpy.Common.Threading
             }
         }
 
+        /// <inheritdoc />
         public bool Wait()
         {
             if (_task != null)
@@ -80,19 +87,28 @@ namespace Grumpy.Common.Threading
             return true;
         }
 
+        /// <inheritdoc />
         public bool IsCompleted => _task?.IsCompleted ?? false;
 
+        /// <inheritdoc />
         public bool IsFaulted => _task?.IsFaulted ?? false;
 
+        /// <inheritdoc />
         public object AsyncState => _task?.AsyncState;
 
+        /// <inheritdoc />
         public Exception Exception => _task?.Exception;
 
+        /// <inheritdoc />
         public void Dispose()
         {
             Dispose(true);
         }
 
+        /// <summary>
+        /// Dispose locale objects
+        /// </summary>
+        /// <param name="disposing"></param>
         [SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed")]  
         protected virtual void Dispose(bool disposing)
         {

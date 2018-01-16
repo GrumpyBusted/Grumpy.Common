@@ -58,16 +58,15 @@ namespace Grumpy.Common.Extensions
         /// <returns>The string representation of object</returns>
         public static string SerializeToXml<T>(this T obj, XmlSerializerNamespaces xmlSerializerNamespaces, XmlWriterSettings xmlWriterSettings)
         {
-            using (var stream = new StringWriter())
+            var stream = new StringWriter();
+
+            var serializer = new XmlSerializer(typeof(T));
+
+            using (var writer = XmlWriter.Create(stream, xmlWriterSettings))
             {
-                var serializer = new XmlSerializer(typeof(T));
+                serializer.Serialize(writer, obj, xmlSerializerNamespaces);
 
-                using (var writer = XmlWriter.Create(stream, xmlWriterSettings))
-                {
-                    serializer.Serialize(writer, obj, xmlSerializerNamespaces);
-
-                    return stream.ToString();
-                }
+                return stream.ToString();
             }
         }
 
