@@ -8,6 +8,7 @@ assembly_info:
 before_build:
 - cmd: nuget restore
 build:
+  configuration: Release
   verbosity: minimal
   publish_nuget: true
 test:
