@@ -16,7 +16,9 @@ test:
     only:
       - '**\bin\**\*.UnitTests.dll'
 after_build:
-  - cmd: nuget pack Grumpy.Common\bin\Release\Grumpy.Common.nuspec -Version $env:APPVEYOR_BUILD_VERSION
+  - cmd: dir
+  - cmd: set
+  - cmd: nuget pack Grumpy.Common\bin\Release\Grumpy.Common.nuspec -Version '$env:APPVEYOR_BUILD_VERSION'
 artifacts:
   - path: '**\Grumpy.Common.*.nupkg'
     name: Nuget
