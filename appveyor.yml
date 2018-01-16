@@ -6,7 +6,7 @@ assembly_info:
   assembly_version: '{version}'
   assembly_file_version: '{version}'
 before_build:
-- cmd: nuget restore
+  - cmd: nuget restore
 build:
   configuration: Release
   verbosity: minimal
@@ -21,10 +21,4 @@ deploy:
     secure: EqocuRN+dPLo43f6XC9SZIry4fYwoAibK7wTAte9Rrbc4Xl/OyWhGo75yv3/Rs+/
   skip_symbols: false
   artifact: /.*\.nupkg/
-notifications:
-  - provider: Email
-    to:
-      - anders@busted-janum.dk
-    subject: 'Build {{projectName}} {{buildVersion}} {{status}}'         
-    message: "{{message}}, {{commitId}}"
-    on_build_status_changed: true
+
