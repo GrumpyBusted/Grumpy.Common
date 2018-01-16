@@ -1,4 +1,4 @@
-[![grumpybusted MyGet Build Status](https://www.myget.org/BuildSource/Badge/grumpybusted?identifier=cf0755d5-5228-4ae4-937c-13d5b267da0b)](https://www.myget.org/feed/grumpybusted/package/nuget/Grumpy.Common)
+[![Build status](https://ci.appveyor.com/api/projects/status/92rb6muqvqw5t6xf?svg=true)](https://ci.appveyor.com/project/GrumpyBusted/grumpy-common)
 [![nuget](https://img.shields.io/nuget/v/Grumpy.Common.svg)](https://www.nuget.org/packages/Grumpy.Common/)
 
 # Grumpy.Common
