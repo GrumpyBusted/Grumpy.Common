@@ -19,7 +19,7 @@
         <copyright>Copyright © Busted-Janum 2018</copyright>
     </metadata>
     <files>
-        <file src="bin\Release\Grumpy.Common.dll" target="lib\net451" />
-        <file src="bin\Release\Grumpy.Common.pdb" target="lib\net451" />
+        <file src="Grumpy.Common.dll" target="lib\net451" />
+        <file src="Grumpy.Common.pdb" target="lib\net451" />
     </files>
 </package>
