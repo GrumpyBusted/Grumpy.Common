@@ -18,7 +18,7 @@ test:
 after_build:
   - ps: nuget pack Grumpy.Common\bin\Release\Grumpy.Common.nuspec -Version $env:APPVEYOR_BUILD_VERSION
 artifacts:
-  - path: '**\bin\**\*.nupkg'
+  - path: '**\*.nupkg'
     name: NuGet
 deploy:
   provider: NuGet
