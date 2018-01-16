@@ -5,7 +5,7 @@ assembly_info:
   assembly_version: '{version}'
   assembly_file_version: '{version}'
 before_build:
-  - cmd: nuget restore
+  - ps: nuget restore
 image: Visual Studio 2017
 configuration: Release
 build:
@@ -16,12 +16,10 @@ test:
     only:
       - '**\bin\**\*.UnitTests.dll'
 after_build:
-  - cmd: dir
-  - cmd: set
-  - cmd: nuget pack Grumpy.Common\bin\Release\Grumpy.Common.nuspec -Version '$env:APPVEYOR_BUILD_VERSION'
+  - ps: nuget pack Grumpy.Common\bin\Release\Grumpy.Common.nuspec -Version $env:APPVEYOR_BUILD_VERSION
 artifacts:
-  - path: '**\Grumpy.Common.*.nupkg'
-    name: Nuget
+  - path: '**\bin\**\*.nupkg'
+    name: NuGet
 deploy:
   provider: NuGet
   api_key:
