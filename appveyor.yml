@@ -7,8 +7,9 @@ assembly_info:
   assembly_file_version: '{version}'
 before_build:
   - cmd: nuget restore
+configuration: 
+  Release
 build:
-  configuration: Release
   verbosity: minimal
   publish_nuget: true
 test:
