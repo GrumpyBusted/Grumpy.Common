@@ -25,4 +25,4 @@ deploy:
   api_key:
     secure: EqocuRN+dPLo43f6XC9SZIry4fYwoAibK7wTAte9Rrbc4Xl/OyWhGo75yv3/Rs+/
   skip_symbols: false
-  artifact: /^Grumpy.Common.*\.nupkg$/
+  artifact: /.*\.nupkg/
