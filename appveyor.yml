@@ -17,8 +17,6 @@ test:
       - '**\bin\**\*.UnitTests.dll'
 test_script:
   - cmd: dir Grumpy.Common.UnitTests\bin\Release
-  - cmd: echo 1 
-  - cmd: cmd /c "%xunit20%\xunit.console.x86.exe"
   - cmd: echo 2
   - cmd: cmd /c "%xunit20%\xunit.console.x86.exe" Grumpy.Common.UnitTests\bin\Release\Grumpy.Common.UnitTests.dll -noshadow
   - cmd: echo 3 
