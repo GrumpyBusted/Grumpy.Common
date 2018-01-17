@@ -16,10 +16,9 @@ test:
     only:
       - '**\bin\**\*.UnitTests.dll'
 test_script:
-  - cmd: set
+  - cmd: "%USERPROFILE%\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe" -register:GrumpyBusted -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"Grumpy.Common.UnitTests.dll -noshadow -output:"coverage.xml" -filter:"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*"
   - cmd: dir
-  - cmd: dir %USERPROFILE%
-  - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"Grumpy.Common.UnitTests.dll -noshadow" -output:"coverage.xml" -filter:"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*"
+  - cmd: type coverage.xml
 after_test:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
