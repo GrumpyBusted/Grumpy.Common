@@ -1,8 +1,10 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/92rb6muqvqw5t6xf?svg=true)](https://ci.appveyor.com/project/GrumpyBusted/grumpy-common)
 [![nuget](https://img.shields.io/nuget/v/Grumpy.Common.svg)](https://www.nuget.org/packages/Grumpy.Common/)
 
+[![codecov](https://codecov.io/gh/GrumpyBusted/Grumpy.Common/branch/master/graph/badge.svg)](https://codecov.io/gh/GrumpyBusted/Grumpy.Common)
+
 # Grumpy.Common
-[![Build status](https://ci.appveyor.com/api/projects/status/92rb6muqvqw5t6xf/branch/master?svg=true)](https://ci.appveyor.com/project/GrumpyBusted/grumpy-common/branch/master)
+(https://ci.appveyor.com/project/GrumpyBusted/grumpy-common/branch/master)
 
 Extension Methods and Helper classes
 ------------------------------------
