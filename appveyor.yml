@@ -20,6 +20,7 @@ test_script:
   - cmd: echo 2
   - cmd: cmd /c "%xunit20%\xunit.console.x86.exe" Grumpy.Common.UnitTests\bin\Release\Grumpy.Common.UnitTests.dll -noshadow
   - cmd: echo 3 
+  - cmd: dir "%USERPROFILE%\.nuget\packages\OpenCover\4.6.519\tools"
   - cmd: cmd /c "%USERPROFILE%\.nuget\packages\OpenCover\4.6.519\tools\OpenCover.Console.exe" -register:GrumpyBusted -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"Grumpy.Common.UnitTests\bin\Release\Grumpy.Common.UnitTests.dll -noshadow" -output:"coverage.xml" -filter:"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*"
   - cmd: dir
   - cmd: type coverage.xml
