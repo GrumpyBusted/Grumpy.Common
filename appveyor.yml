@@ -4,6 +4,13 @@ assembly_info:
   file: '**\AssemblyInfo.cs'
   assembly_version: '{version}'
   assembly_file_version: '{version}'
+skip_commits:
+  message: /NO-BUILD/
+  files:
+    - docs/*
+    - 'appveyor.yml'
+    - 'LICENSE'
+    - 'README.md'
 before_build:
   - ps: nuget restore
 image: Visual Studio 2017
