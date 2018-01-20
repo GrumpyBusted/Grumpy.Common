@@ -5,11 +5,7 @@
         <version>0</version>
         <title>Grumpy.Common</title>
         <description>Extension Methods and Helper classes</description>
-        <summary>
-            Extension methods for string, object etc. used in my other projects, this NuGet package do not refer other Packages or
-            Libraries. This library includes code that I have developed, copied from the internet and copied from a few friends. The
-            intention of the library is to make coding easier in other projects.
-        </summary>
+        <summary>Extension methods for string, object etc. used in my other projects, this NuGet package do not refer other Packages or Libraries. This library includes code that I have developed, copied from the internet and copied from a few friends. The intention of the library is to make coding easier in other projects.</summary>
         <tags>xml extension-methods task process-information unique-id</tags>
         <authors>Anders Busted-Janum</authors>
         <owners>GrumpyBusted</owners>
