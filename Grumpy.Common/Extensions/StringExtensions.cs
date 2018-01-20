@@ -421,6 +421,9 @@ namespace Grumpy.Common.Extensions
 
             var parts = exp.Split(value);
 
+            if (quantityPos > parts.Length || unitPos > parts.Length)
+                throw new InvalidFormatException(value);
+        
             var number = int.Parse(parts[quantityPos]);
 
             int factor;
@@ -433,6 +436,7 @@ namespace Grumpy.Common.Extensions
                     factor = 3600000;
                     break;
 
+                case "m":
                 case "min":
                     factor = 60000;
                     break;

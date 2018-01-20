@@ -42,8 +42,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInformationTests.cs" />
     <Compile Include="Helper\MyWaitHandle.cs" />
     <Compile Include="ObjectExtensionsTests.cs" />
+    <Compile Include="ProcessInformationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="Helper\TestPerson.cs" />

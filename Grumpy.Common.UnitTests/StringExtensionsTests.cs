@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using FluentAssertions;
+using Grumpy.Common.Exceptions;
 using Grumpy.Common.Extensions;
 using Grumpy.Common.UnitTests.Helper;
 using Xunit;
@@ -457,9 +458,69 @@ namespace Grumpy.Common.UnitTests
         }
 
         [Fact]
-        public void ToMilliseconds_Match()
+        public void ToMilliseconds_1s_Match()
         {
             Assert.Equal(new TimeSpan(0, 0, 0, 1).TotalMilliseconds, "1s".ToMilliseconds());
+        }
+        
+        [Fact]
+        public void ToMilliseconds_1m_Match()
+        {
+            Assert.Equal(new TimeSpan(0, 0, 1, 0).TotalMilliseconds, "1m".ToMilliseconds());
+        }
+        
+        [Fact]
+        public void ToMilliseconds_1h_Match()
+        {
+            Assert.Equal(new TimeSpan(0, 1, 0, 0).TotalMilliseconds, "1h".ToMilliseconds());
+        }
+        
+        [Fact]
+        public void ToMilliseconds_1ms_Match()
+        {
+            Assert.Equal(new TimeSpan(0, 0, 0, 0, 1).TotalMilliseconds, "1ms".ToMilliseconds());
+        }
+        
+        [Fact]
+        public void ToMilliseconds_1ks_Match()
+        {
+            Assert.Equal(new TimeSpan(0, 0, 0, 1000, 0).TotalMilliseconds, "1ks".ToMilliseconds());
+        }
+        
+        [Fact]
+        public void ToMilliseconds_1Ms_Match()
+        {
+            Assert.Equal(new TimeSpan(0, 0, 0, 1000000).TotalMilliseconds, "1Ms".ToMilliseconds());
+        }
+        
+        [Fact]
+        public void ToMilliseconds_WithInvalidFormat_ThrowException()
+        {
+            Assert.Throws<InvalidFormatException>(() => "1t".ToMilliseconds());
+        }
+        
+        [Fact]
+        public void ToMilliseconds_WithInvalidFormat2_ThrowException()
+        {
+            Assert.Throws<InvalidFormatException>(() => "1sk".ToMilliseconds());
+        }
+        
+        [Fact]
+        public void ToSeconds_Match()
+        {
+            Assert.Equal(60, "1min".ToSeconds());
+        }
+        
+        [Fact]
+        public void ToTimeSpan_Match()
+        {
+            Assert.Equal(new TimeSpan(0, 1, 0), "1min".ToTimeSpan());
+        }
+        
+        [Fact]
+        public void To_TimeSpan_Match()
+        {
+            Assert.Equal(new TimeSpan(0, 1, 0), "1min".To<TimeSpan>());
         }
 
         [Fact]
@@ -615,6 +676,12 @@ namespace Grumpy.Common.UnitTests
         }
 
         [Fact]
+        public void ToProperName_9()
+        {
+            Assert.Equal("", "".ToProperName());
+        }
+
+        [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
         public void ToProperName_Danish_1()
         {
@@ -739,7 +806,7 @@ namespace Grumpy.Common.UnitTests
         [Fact]
         public void ToProperParagraph_UpdateCaseString()
         {
-            Assert.Equal("Karin is testing", "KARIN IS TESTING".ToProperFirst());
+            Assert.Equal("Jane is testing", "JANE IS TESTING".ToProperFirst());
         }
 
         [Fact]
@@ -775,7 +842,12 @@ namespace Grumpy.Common.UnitTests
         [Fact]
         public void ToProper_UpperCaseString()
         {
-            Assert.Equal("Karin Is Testing", "KARIN IS TESTING".ToProper());
+            Assert.Equal("Jane Is Testing", "JANE IS TESTING".ToProper()); }
+
+        [Fact]
+        public void ToProper_WithEmpty_UpperCaseString()
+        {
+            Assert.Equal("", "".ToProper());
         }
 
         [Fact]
