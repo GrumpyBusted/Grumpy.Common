@@ -19,7 +19,7 @@ namespace Grumpy.Common
         /// <inheritdoc />
         public AssemblyInformation()
         {
-            Set(Assembly.GetExecutingAssembly());
+            Set(Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly());
         }
 
         /// <inheritdoc />
