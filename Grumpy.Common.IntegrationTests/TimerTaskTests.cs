@@ -36,5 +36,19 @@ namespace Grumpy.Common.IntegrationTests
             _cut.Stop();
             i.Should().BeGreaterOrEqualTo(2);
         }
+
+        [Fact]
+        public void CanRestartTask()
+        {
+            var i = 0;
+            _cut.Start(() => ++i, 10, new CancellationToken());
+            TimerUtility.WaitForIt(() => i > 2, 100);
+            _cut.Stop();
+            i.Should().BeGreaterOrEqualTo(2);
+            _cut.Start(() => ++i, 10, new CancellationToken());
+            TimerUtility.WaitForIt(() => i > 4, 100);
+            _cut.Stop();
+            i.Should().BeGreaterOrEqualTo(4);
+        }
     }
 }
