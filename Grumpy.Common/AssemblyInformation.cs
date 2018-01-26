@@ -32,7 +32,7 @@ namespace Grumpy.Common
         {
             Description = GetAssemblyAttribute<AssemblyDescriptionAttribute>(assembly)?.Description ?? "Description not defined";
             Title = GetAssemblyAttribute<AssemblyTitleAttribute>(assembly)?.Title ?? $"TitleMissing.{UniqueKeyUtility.Generate()}";
-            Version = GetAssemblyAttribute<AssemblyVersionAttribute>(assembly)?.Version ?? GetAssemblyAttribute<AssemblyFileVersionAttribute>(assembly)?.Version ?? "0.0";
+            Version = assembly.GetName().Version.ToString();
         }
 
         private static T GetAssemblyAttribute<T>(Assembly assembly) where T : Attribute
