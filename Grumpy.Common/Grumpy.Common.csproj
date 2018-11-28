@@ -42,8 +42,12 @@
     <Compile Include="Interfaces\IProcessInformation.cs" />
     <Compile Include="Interfaces\IUniqueKey.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Interfaces\IProcessor.cs" />
     <Compile Include="ProcessInformation.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Processor.cs" />
+    <Compile Include="ProcessorRunCycle\ProcessorRunCycleGetDelegate.cs" />
+    <Compile Include="ProcessorRunCycle\ProcessorRunCycleImplementation.cs" />
     <Compile Include="UniqueKey.cs" />
     <Compile Include="UniqueKeyUtility.cs" />
     <Compile Include="Interfaces\ITask.cs" />
