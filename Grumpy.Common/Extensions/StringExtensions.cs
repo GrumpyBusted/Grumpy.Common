@@ -295,10 +295,8 @@ namespace Grumpy.Common.Extensions
 
             StringBuilder sb = null;
 
-            foreach (var subString in parts)
+            foreach (var part in parts.Select(subString => subString.Replace(escapeCharacter + escapeCharacter.ToString(), escapeCharacter.ToString())))
             {
-                var part = subString.Replace(escapeCharacter + escapeCharacter.ToString(), escapeCharacter.ToString());
-
                 if (part.EndsWith(escapeCharacter.ToString()))
                 {
                     if (sb == null)

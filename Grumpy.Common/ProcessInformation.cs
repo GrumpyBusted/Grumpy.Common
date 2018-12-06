@@ -68,7 +68,7 @@ namespace Grumpy.Common
 
         private static string GetSessionInformation(Process process, int informationType)
         {
-            return ProcessInformationNativeMethods.WTSQuerySessionInformationW(WtsCurrentServerHandle, process.SessionId, informationType, out var answerBytes, out var _) ? Marshal.PtrToStringUni(answerBytes) : null;
+            return ProcessInformationNativeMethods.WTSQuerySessionInformationW(WtsCurrentServerHandle, process.SessionId, informationType, out var answerBytes, out _) ? Marshal.PtrToStringUni(answerBytes) : null;
         }
     }
 }

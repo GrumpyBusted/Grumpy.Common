@@ -45,6 +45,7 @@
     <Compile Include="AssemblyInformationTests.cs" />
     <Compile Include="Helper\MyClass.cs" />
     <Compile Include="Helper\MyWaitHandle.cs" />
+    <Compile Include="Helper\TestTeam.cs" />
     <Compile Include="ObjectExtensionsTests.cs" />
     <Compile Include="ProcessInformationTests.cs" />
     <Compile Include="ProcessorTimestampTest.cs" />

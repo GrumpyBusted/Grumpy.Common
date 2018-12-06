@@ -25,6 +25,7 @@ namespace Grumpy.Common.ProcessorRunCycle
         // Calling convention on x64: fastcall, registers rax, rcd, rdx are considered volatile and destroyed on function calls
         private static readonly byte[] Assembler =
         {
+            // ReSharper disable once CommentTypo
             0x0F,       // rdtscp              ; edx = hi-dword of TSC, eax = lo-dword of TSC, ecx = ia32_tsc_aux
             0x01, 
             0xF9, 

@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using Grumpy.Common.Interfaces;
 using Xunit;
 
 namespace Grumpy.Common.UnitTests
@@ -11,7 +12,7 @@ namespace Grumpy.Common.UnitTests
         [Fact]
         public void ManualDriverTest()
         {
-            var cut = new Processor();
+            IProcessor cut = new Processor();
             var runCycleStart = cut.RunCycle;
             Thread.Sleep(3000);
             var runCycleEnd = cut.RunCycle;

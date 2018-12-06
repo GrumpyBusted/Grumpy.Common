@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml;
 using System.Xml.Serialization;
 using Grumpy.Common.Exceptions;
@@ -167,6 +168,25 @@ namespace Grumpy.Common.Extensions
                 throw new MethodNotImplementedException(obj.GetType(), methodName);
 
             return method.Invoke(obj, parameters);
+        }
+
+        /// <summary>
+        /// Deep clone an object, copy all data. Object need to be serializable
+        /// </summary>
+        /// <param name="source">Source object</param>
+        /// <typeparam name="T">Type of object</typeparam>
+        /// <returns>Result object</returns>
+        public static T Clone<T>(this T source)
+        {
+            using (var stream = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+
+                formatter.Serialize(stream, source);
+                stream.Position = 0;
+
+                return (T)formatter.Deserialize(stream);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using ApprovalTests;
@@ -311,6 +312,7 @@ namespace Grumpy.Common.UnitTests
         {
             var myObject = new MyClass();
 
+            myObject.InvokeMethod("PrivateMethod", new object[] {"Set from Private"}).Should().Be("Set from Private");
             myObject.InvokeMethod("PrivateMethod", new object[] {"Set from Private"});
             myObject.Data.Should().Be("Set from Private");
             myObject.InvokeMethod("ProtectedMethod", new object[] {"Set from Protected"});
@@ -319,6 +321,30 @@ namespace Grumpy.Common.UnitTests
             myObject.Data.Should().Be("Set from Internal");
             myObject.InvokeMethod("PublicMethod", new object[] {"Set from Public"});
             myObject.Data.Should().Be("Set from Public");
+        }
+
+        [Fact]
+        public void CloneObject_Work()
+        {
+            var team = new TestTeam
+            {
+                People = new List<TestPerson>
+                {
+                    new TestPerson
+                    {
+                        Name = "Sara"
+                    },
+                    new TestPerson
+                    {
+                        Name = "Cathrine"
+                    }
+                }
+            };
+
+            var team2 = team.Clone();
+
+            team2.People[1].Name = "Emil";
+            team.People[1].Name.Should().Be("Cathrine");
         }
     }
 }

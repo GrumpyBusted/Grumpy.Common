@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-
-namespace Grumpy.Common.UnitTests.Helper
+﻿namespace Grumpy.Common.UnitTests.Helper
 {
     public class MyClass
     {
@@ -22,9 +20,7 @@ namespace Grumpy.Common.UnitTests.Helper
 
         internal string InternalMethod(string data)
         {
-            Data = data;
-
-            return Data;
+            return PrivateMethod(data);
         }
 
         private string PrivateMethod(string data)
