@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
+using Grumpy.Common.Exceptions;
 
 namespace Grumpy.Common.Extensions
 {
@@ -148,6 +150,23 @@ namespace Grumpy.Common.Extensions
                 || value is float
                 || value is double
                 || value is decimal;
+        }
+
+        /// <summary>
+        /// Invoke method using reflection, this call also invoke private methods
+        /// </summary>
+        /// <param name="obj">This object</param>
+        /// <param name="methodName">Name of Method</param>
+        /// <param name="parameters">List of parameters</param>
+        /// <returns>Return object</returns>
+        public static object InvokeMethod(this object obj, string methodName, object[] parameters)
+        {
+            var method = obj.GetType().GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+            if (method == null)
+                throw new MethodNotImplementedException(obj.GetType(), methodName);
+
+            return method.Invoke(obj, parameters);
         }
     }
 }

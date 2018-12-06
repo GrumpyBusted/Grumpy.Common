@@ -305,5 +305,20 @@ namespace Grumpy.Common.UnitTests
             f.IsNumber().Should().BeTrue();
             s.IsNumber().Should().BeFalse();
         }
+
+        [Fact]
+        public void InvokeMethod_Works()
+        {
+            var myObject = new MyClass();
+
+            myObject.InvokeMethod("PrivateMethod", new object[] {"Set from Private"});
+            myObject.Data.Should().Be("Set from Private");
+            myObject.InvokeMethod("ProtectedMethod", new object[] {"Set from Protected"});
+            myObject.Data.Should().Be("Set from Protected");
+            myObject.InvokeMethod("InternalMethod", new object[] {"Set from Internal"});
+            myObject.Data.Should().Be("Set from Internal");
+            myObject.InvokeMethod("PublicMethod", new object[] {"Set from Public"});
+            myObject.Data.Should().Be("Set from Public");
+        }
     }
 }

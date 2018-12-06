@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\InvalidFormatException.cs" />
     <Compile Include="AssemblyInformation.cs" />
+    <Compile Include="Exceptions\MethodNotImplementedException.cs" />
     <Compile Include="Interfaces\IAssemblyInformation.cs" />
     <Compile Include="Interfaces\IProcessInformation.cs" />
     <Compile Include="Interfaces\IUniqueKey.cs" />
