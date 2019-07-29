@@ -370,8 +370,8 @@ namespace Grumpy.Common.Extensions
         /// <returns>Index of the search for value</returns>
         public static int IndexOfNth(this string value, string searchFor, int nth, int startIndex = 0)
         {
-                if (nth < 1)
-                    throw new NotSupportedException("Param 'nth' must be greater than 0!");
+            if (nth < 1)
+                throw new NotSupportedException("Param 'nth' must be greater than 0!");
 
             while (true)
             {
@@ -421,7 +421,7 @@ namespace Grumpy.Common.Extensions
 
             if (quantityPos > parts.Length || unitPos > parts.Length)
                 throw new InvalidFormatException(value);
-        
+
             var number = int.Parse(parts[quantityPos]);
 
             int factor;

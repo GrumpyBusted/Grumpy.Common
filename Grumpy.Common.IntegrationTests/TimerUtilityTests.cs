@@ -22,7 +22,11 @@ namespace Grumpy.Common.IntegrationTests
         [Fact]
         public void CanWaitForItWithoutTimeout()
         {
+            const bool res = true;
+
             TimerUtility.WaitForIt(() => true);
+
+            res.Should().BeTrue();
         }
     }
 }

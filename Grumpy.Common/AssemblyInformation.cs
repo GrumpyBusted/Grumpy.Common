@@ -37,7 +37,7 @@ namespace Grumpy.Common
 
         private static T GetAssemblyAttribute<T>(Assembly assembly) where T : Attribute
         {
-            return Attribute.IsDefined(assembly, typeof(T)) ? (T) Attribute.GetCustomAttribute(assembly, typeof(T)) : default(T);
+            return Attribute.IsDefined(assembly, typeof(T)) ? (T) Attribute.GetCustomAttribute(assembly, typeof(T)) : default;
         }
     }
 }

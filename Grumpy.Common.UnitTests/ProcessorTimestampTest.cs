@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Grumpy.Common.UnitTests
 {
-    public class ProcessorTimestampTest
+    public class ProcessorTimestampTest 
     {
         [Fact]
         public void ManualDriverTest()
@@ -20,11 +20,14 @@ namespace Grumpy.Common.UnitTests
             var cyclesPerSec = 1024 * Stopwatch.Frequency;
             var elapsed = (double)delta / cyclesPerSec;
             
+            
             Console.WriteLine($"{runCycleStart:x16} {runCycleStart}");
             Console.WriteLine($"{runCycleEnd:x16} {runCycleEnd}");
             Console.WriteLine($"{delta:x16} {delta}");
             Console.WriteLine($"Cycles per sec:  {cyclesPerSec}");
             Console.WriteLine($"Elapsed:         {elapsed:F10}s");
+
+            elapsed.Should().BeLessThan(10000);
         }
 
         [Fact]
