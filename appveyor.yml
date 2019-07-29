@@ -10,7 +10,7 @@ configuration: Release
 before_build:
   - ps: dotnet restore --no-cache --verbosity=normal
 build_script:
-  - ps: dotnet build **/*.sln --no-restore --configuration="release" -p:Version="$env:APPVEYOR_BUILD_VERSION"
+  - ps: dotnet build --no-restore --configuration="release" -p:Version="$env:APPVEYOR_BUILD_VERSION"
 test:
   assemblies:
     only:
