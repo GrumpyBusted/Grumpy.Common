@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BEF1B4D8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grumpy.Common", "Grumpy.Common\Grumpy.Common.csproj", "{049EA377-48D9-4B06-82B9-0F3F35C47915}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grumpy.Common.UnitTests", "Grumpy.Common.UnitTests\Grumpy.Common.UnitTests.csproj", "{34EBC115-7C14-4129-B94D-2E95E9AFA46D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grumpy.Common.UnitTests", "Grumpy.Common.UnitTests\Grumpy.Common.UnitTests.csproj", "{34EBC115-7C14-4129-B94D-2E95E9AFA46D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grumpy.Common.IntegrationTests", "Grumpy.Common.IntegrationTests\Grumpy.Common.IntegrationTests.csproj", "{46D9E517-0D60-4763-9CB8-A872291D9074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grumpy.Common.IntegrationTests", "Grumpy.Common.IntegrationTests\Grumpy.Common.IntegrationTests.csproj", "{46D9E517-0D60-4763-9CB8-A872291D9074}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

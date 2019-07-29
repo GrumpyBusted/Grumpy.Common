@@ -5,13 +5,12 @@ skip_commits:
     - docs/*
     - 'LICENSE'
     - 'README.md'
-before_build:
-  - ps: nuget restore
 image: Visual Studio 2019
 configuration: Release
-build:
-  parallel: true 
-  verbosity: minimal
+before_build:
+  - ps: dotnet restore --no-cache --verbosity=normal
+build_script:
+  - ps: dotnet build **/*.sln --no-restore --configuration="release" -p:Version="$(appveyor_build_version)"
 test:
   assemblies:
     only:
@@ -24,8 +23,7 @@ after_test:
       Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
       bash codecov.sh -f "coverage.xml" -t c5001df3-6360-43c5-90b8-86ad45d57c82
 after_build:
-  - ps: 'dir /b /s'
-  - ps: nuget pack Grumpy.Common\bin\Release\Grumpy.Common.nuspec -Version $env:APPVEYOR_BUILD_VERSION
+  - ps: dotnet pack --no-build --include-symbols --include-source --verbosity=normal -p:PackageVersion="$(appveyor_build_version)" --configuration="release"
 artifacts:
   - path: '**\*.nupkg'
     name: NuGet
