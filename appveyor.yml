@@ -6,7 +6,6 @@ skip_commits:
     - 'LICENSE'
     - 'README.md'
 image: Visual Studio 2019
-configuration: Release
 before_build:
   - ps: dotnet restore --no-cache --verbosity=normal
 build_script:
