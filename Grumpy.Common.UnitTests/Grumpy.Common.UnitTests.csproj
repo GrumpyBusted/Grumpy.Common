@@ -5,6 +5,8 @@
     <IsPackable>false</IsPackable>
     <Description>Unit Tests for Grumpy.Common</Description>
     <Copyright>Copyright © Busted-Janum 2019</Copyright>
+    <Company>GrumpyBusted</Company>
+    <Authors>Anders Busted-Janum</Authors>
   </PropertyGroup>
 
   <ItemGroup>
