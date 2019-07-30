@@ -14,7 +14,7 @@ build_script:
 after_build:
   - ps: dotnet pack --no-build --include-symbols --include-source --verbosity=normal -p:PackageVersion="$env:APPVEYOR_BUILD_VERSION" --configuration="release"
 test_script:
-  - ps: & "\"%USERPROFILE%\\.nuget\\packages\\OpenCover\\4.7.922\\tools\\OpenCover.Console.exe\" -register:user -oldStyle -target:\"%ProgramFiles%\\dotnet\\dotnet.exe\" -targetargs:\"test Grumpy.Common.UnitTests\\Grumpy.Common.UnitTests.csproj\" -output:\"coverage.xml\" -filter:\"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*\""
+  - cmd: "\"%USERPROFILE%\\.nuget\\packages\\OpenCover\\4.7.922\\tools\\OpenCover.Console.exe\" -register:user -oldStyle -target:\"%ProgramFiles%\\dotnet\\dotnet.exe\" -targetargs:\"test Grumpy.Common.UnitTests\\Grumpy.Common.UnitTests.csproj\" -output:\"coverage.xml\" -filter:\"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*\""
 after_test:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
