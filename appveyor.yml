@@ -13,12 +13,8 @@ build_script:
   - ps: dotnet build --no-restore --configuration="release" -p:Version="$env:APPVEYOR_BUILD_VERSION"
 after_build:
   - ps: dotnet pack --no-build --include-symbols --include-source --verbosity=normal -p:PackageVersion="$env:APPVEYOR_BUILD_VERSION" --configuration="release"
-test:
-  assemblies:
-    only:
-      - '**\bin\**\*.UnitTests.dll'
 test_script:
-  - cmd: "\"%USERPROFILE%\\.nuget\\packages\\OpenCover\\4.7.922\\tools\\OpenCover.Console.exe\" -register:user -target:\"%xunit20%\\xunit.console.x86.exe\" -targetargs:\"Grumpy.Common.UnitTests\\bin\\Release\\netcoreapp2.2\\Grumpy.Common.UnitTests.dll -noshadow\" -output:\"coverage.xml\" -filter:\"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*\""
+  - ps: & "\"%USERPROFILE%\\.nuget\\packages\\OpenCover\\4.7.922\\tools\\OpenCover.Console.exe\" -register:user -oldStyle -target:\"%ProgramFiles%\\dotnet\\dotnet.exe\" -targetargs:\"test Grumpy.Common.UnitTests\\Grumpy.Common.UnitTests.csproj\" -output:\"coverage.xml\" -filter:\"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*\""
 after_test:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
