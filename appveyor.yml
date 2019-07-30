@@ -13,8 +13,11 @@ build_script:
   - ps: dotnet build --no-restore --configuration="release" -p:Version="$env:APPVEYOR_BUILD_VERSION"
 after_build:
   - ps: dotnet pack --no-build --include-symbols --include-source --verbosity=normal -p:PackageVersion="$env:APPVEYOR_BUILD_VERSION" --configuration="release"
+test:
+  assemblies:
+    only:
+      - '**\bin\**\*.UnitTests.dll'
 test_script:
-  - ps: dotnet test --no-build --configuration="release"
   - cmd: "\"%USERPROFILE%\\.nuget\\packages\\OpenCover\\4.7.922\\tools\\OpenCover.Console.exe\" -register:user -target:\"%xunit20%\\xunit.console.x86.exe\" -targetargs:\"Grumpy.Common.UnitTests\\bin\\Release\\Grumpy.Common.UnitTests.dll -noshadow\" -output:\"coverage.xml\" -filter:\"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*\""
 after_test:
   - ps: |
