@@ -11,19 +11,16 @@ before_build:
   - ps: dotnet restore --no-cache --verbosity=normal
 build_script:
   - ps: dotnet build --no-restore --configuration="release" -p:Version="$env:APPVEYOR_BUILD_VERSION"
-test:
-  assemblies:
-    only:
-      - '**\bin\**\*.UnitTests.dll'
+after_build:
+  - ps: dotnet pack --no-build --include-symbols --include-source --verbosity=normal -p:PackageVersion="$env:APPVEYOR_BUILD_VERSION" --configuration="release"
 test_script:
-  - cmd: "\"%USERPROFILE%\\.nuget\\packages\\OpenCover\\4.6.519\\tools\\OpenCover.Console.exe\" -register:user -target:\"%xunit20%\\xunit.console.x86.exe\" -targetargs:\"Grumpy.Common.UnitTests\\bin\\Release\\Grumpy.Common.UnitTests.dll -noshadow\" -output:\"coverage.xml\" -filter:\"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*\""
+  - ps: dotnet test --no-build --configuration="release"
+  - cmd: "\"%USERPROFILE%\\.nuget\\packages\\OpenCover\\4.7.922\\tools\\OpenCover.Console.exe\" -register:user -target:\"%xunit20%\\xunit.console.x86.exe\" -targetargs:\"Grumpy.Common.UnitTests\\bin\\Release\\Grumpy.Common.UnitTests.dll -noshadow\" -output:\"coverage.xml\" -filter:\"+[Grumpy.Common*]* -[Grumpy.Common.UnitTests*]*\""
 after_test:
   - ps: |
       $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
       Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
       bash codecov.sh -f "coverage.xml" -t c5001df3-6360-43c5-90b8-86ad45d57c82
-after_build:
-  - ps: dotnet pack --no-build --include-symbols --include-source --verbosity=normal -p:PackageVersion="$env:APPVEYOR_BUILD_VERSION" --configuration="release"
 artifacts:
   - path: '**\*.nupkg'
     name: NuGet
